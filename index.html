@@ -13,13 +13,19 @@
   </iframe>
 
   <script>
-    window.onload = function() {
-      document.querySelector('iframe')
-        .requestFullscreen()
-        .catch((err) => {
-          console.error('Error attempting to enable full-screen mode:', err.message);
-        });
-    };
+    (() => {
+        console.log("loading page");
+        const f = document.querySelector("iframe");
+        f.onload = (e) => {
+          console.log("iframe onload");
+          const fw = f.contentWindow;
+          if (fw.length > 0) console.info("logged in");
+          else {
+            alert("Please Login!");
+            window.location = "https://accounts.google.com";
+          }
+        };
+      })();
   </script>
 </body>
 </html>
